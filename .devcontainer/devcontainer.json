@@ -1,0 +1,20 @@
+{
+  "name": "IoT-practicum precisielandbouw",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" }
+  },
+  "postCreateCommand": "pip install --user -r requirements.txt",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ],
+      "settings": {
+        "jupyter.askForKernelRestart": false
+      }
+    }
+  },
+  "hostRequirements": { "cpus": 2 }
+}

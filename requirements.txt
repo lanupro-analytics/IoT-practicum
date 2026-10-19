@@ -1,0 +1,5 @@
+paho-mqtt>=2.0
+requests>=2.31
+pandas>=2.0
+matplotlib>=3.8
+ipykernel>=6.29
