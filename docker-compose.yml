@@ -1,0 +1,13 @@
+name: iot-practicum
+
+services:
+  iot-practicum:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/workspace
+    environment:
+      - JUPYTER_ENABLE_LAB=yes

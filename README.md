@@ -10,16 +10,37 @@ Je leert in dit practicum, zonder fysieke sensor:
 4. echte klimaatsensoren in België uitlezen via **HTTP/JSON** en er de THI uit berekenen;
 5. een virtuele ESP32 met temperatuur-/vochtsensor bouwen in de **Wokwi**-simulator.
 
-## Openen zonder installatie (GitHub Codespaces)
+---
+
+## 1. Starten in GitHub Codespaces (aanbevolen)
 
 1. Klik bovenaan op **Code ▸ Codespaces ▸ Create codespace on main**.
-2. Wacht tot de omgeving klaar is (eerste keer 2–3 minuten; de Python-pakketten worden automatisch geïnstalleerd).
+2. Wacht tot de omgeving klaar is (eerste keer 2–3 minuten; Python 3.12, Node.js en alle afhankelijkheden worden automatisch geïnstalleerd via `.devcontainer`).
 3. Open de map `notebooks/` en begin met `00_start_hier.ipynb`.
-4. Kies bij de eerste code-cel als kernel **Python 3.12** (rechtsboven in het notebook).
+4. De kernel **Python 3 (ipykernel)** staat automatisch geselecteerd.
 
-Een Codespace is een volledige VS Code in je browser; je hebt enkel een GitHub-account nodig. Gratis accounts krijgen maandelijks 60 uur op een 2-core-machine, ruim voldoende voor dit practicum. **Stop je Codespace** na de les (Code ▸ Codespaces ▸ ⋯ ▸ Stop) om geen uren te verbruiken.
+> **Tip:** Een Codespace is een volledige VS Code-omgeving in je browser. Vergeet niet om je Codespace na de les te stoppen (**Code ▸ Codespaces ▸ ⋯ ▸ Stop**) om geen gratis uren te verbruiken.
 
-## Lokaal werken (optioneel)
+---
+
+## 2. Lokaal werken met Docker
+
+Werk je liever lokaal met Docker? Dat kan op twee manieren:
+
+### Optie A: Via Docker Compose (JupyterLab)
+```bash
+docker compose up
+```
+Open vervolgens `http://localhost:8888` in je browser om JupyterLab te openen.
+
+### Optie B: Via VS Code Dev Containers
+1. Installeer Docker Desktop en de **Dev Containers**-extensie in VS Code.
+2. Open deze map in VS Code, druk op `F1` en kies **Dev Containers: Reopen in Container**.
+3. VS Code bouwt de container op basis van `.devcontainer/devcontainer.json`.
+
+---
+
+## 3. Lokaal werken met Python (optioneel, zonder Docker)
 
 ```bash
 git clone <deze-repo>
@@ -27,6 +48,8 @@ cd iot_practicum
 pip install -r requirements.txt
 jupyter lab
 ```
+
+---
 
 ## Inhoud
 
