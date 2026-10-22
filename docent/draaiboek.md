@@ -1,109 +1,183 @@
 # Docentendraaiboek · Starten met IoT "van webshop tot datastroom"
 
-*Bij les 2 Klimaatbeheersing, onderdeel 2.3 (slides 43–44). Versie 19 oktober 2026.*
+*Bij les 2 Klimaatbeheersing, onderdeel 2.3 (slides 43–44). Versie oktober 2026.*
+
+## Structurele Opzet & Bestandsbeheer
+
+Het practicum kent twee versies die in de repository beheerd worden:
+
+1. **`docent/notebooks/` (Docentenversie):**
+   * **Doel:** Volledige referentie, uitgewerkte code-oplossingen, ingevulde tabellen en **100% voorgevoerde uitvoerblokken** (plots, tabellen, console-logs).
+   * **Gebruik:** Voor de docent tijdens het lesgeven of als naslagwerk.
+2. **`notebooks/` (Studentenversie):**
+   * **Doel:** Actief werkblad voor studenten.
+   * **Geïntegreerde Didactiek:** 
+     * **Code-oplossingscellen verwijderd:** Codecellen met de tag `tags: ["oplossing"]` zijn gestript. Studenten typen hun eigen Python-code in de daarboven gelegen invulbare studenten-codecellen met `# SCHRIJF HIER JE CODE:`.
+     * **Verborgen Markdown-oplossingen behouden:** Inklapbare HTML-secties (`<details><summary><b>Oplossing tonen</b></summary></details>`) voor inhoudelijke/conceptuele vragen blijven behouden in het studentennotebook.
+     * **Geen herhaling:** Instructies staan in Markdown, beknopte Hints/Startercode in de `#` comments van de codecel.
+     * **Groene Callout-boxen (`background-color: #e8f5e9; color: #1b5e20;`):** Ondersteunen direct onder de uitvoer de interpretatie van netwerkdata, JSON-structuren en grafieken.
+
+---
 
 ## Voorbereiding (één keer, ± 30 min)
 
 1. **Repository op GitHub zetten** (publiek of binnen de UGent-organisatie) en de Codespaces-knop in de README testen: *Code ▸ Codespaces ▸ Create codespace*. De eerste build duurt 2–3 min; daarna start een Codespace in ± 30 s.
-2. **Klascode kiezen**, bv. `i700301-2026-k7q2` (iets onvoorspelbaars: de broker is publiek). Zet ze in `02_mqtt_live_meekijken.ipynb` (variabele `KLASCODE`), in `04_…` en in `wokwi/main.py`, en geef ze op het bord.
-3. **Eigen Codespace openen** en alle notebooks één keer volledig uitvoeren. Notebook 02, sectie 5 (virtuele S31-CB) laat je tijdens de les in een **apart tabblad** draaien, zodat je zelf ook kunt meekijken.
+2. **Klascode kiezen**, bv. `i700301-2026-k7q2` (iets onvoorspelbaars: de broker is publiek). Zet ze in `02_mqtt_live_meekijken.ipynb` (variabele `KLASCODE`), in `04_wokwi_virtuele_sensor.ipynb` en in `wokwi/main.py`, en geef ze op het bord.
+3. **Eigen Codespace openen** en alle docentennotebooks (`docent/notebooks/*.ipynb`) één keer doorlopen. Notebook 02, sectie 5 (virtuele S31-CB) laat je tijdens de les in een **apart tabblad** draaien, zodat je zelf ook kunt meekijken met het klasverkeer.
 4. Optioneel: de **HiveMQ Websocket Client** (<https://www.hivemq.com/demos/websocket-client/>) in een browsertab open hebben, verbonden met `broker.hivemq.com:8884` (SSL), geabonneerd op `ugent/<klascode>/#`. Handig als "scherm vooraan" om alle groepen te zien.
 5. Antratek- en Dragino-pagina's in tabbladen klaarzetten (adressen in README).
 
+---
+
 ## Lesverloop (± 2 × 50 min)
 
-| Tijd | Wat | Hoe |
+| Tijd | Wat | Hoe & Wat er precies gebeurt |
 |---|---|---|
-| 0–10 | Notebook 00 | Iedereen opent een Codespace, voert 00 uit. Wie geen GitHub-account heeft: HiveMQ-webclient (sectie 7 van notebook 02) en meekijken met een buur. |
-| 10–25 | Stap 1–2 van notebook 01 | **Jij demonstreert** op het scherm: Antratek ▸ product ▸ artikelnummer EU868 ▸ "meer info op Dragino" ▸ handleiding §2.2, §2.3, §2.4. Studenten volgen op hun eigen scherm en vullen opdracht 1.1 en 2.1 in (5 min, in duo's). |
-| 25–50 | Stap 3 van notebook 01 | Byte voor byte samen decoderen (cellen 3a–3f). Daarna opdracht 3.1 met pen en papier; controle met de functie; dan de officiële JS-decoder (3g). |
-| 50–60 | pauze | |
-| 60–70 | Stap 4 van notebook 01 | S31-CB: `AT+PRO`, JSON-voorbeeld, grafiek. Koppel aan slide 44. |
-| 70–95 | Notebook 02 | Jij start de virtuele S31-CB (sectie 5, `DUUR = 1500`). Studenten: sectie 3 (luisteren), 4 (publiceren — laat ze elkaars berichten zien), 6 (tabel + grafiek). |
-| 95–110 | Notebook 03 (of 04) | Keuze: echte data + THI (03) als je de link met les 2 wil, of Wokwi (04) als je "zelf een toestel bouwen" wil. Het andere notebook is huiswerk. |
-| 110–120 | Afronding | Terugkoppeling naar slides 43–44: waar zat elk verbindingstype en elk protocol in wat we deden? |
+| **0–10 min** | **Notebook 00: Start hier** | • Studenten openen hun Codespace en voeren **Notebook 00** uit.<br>• **Pakketcontrole:** Python 3.12, `paho-mqtt`, `requests`, `pandas`, `matplotlib` worden gevalideerd.<br>• **MQTT & HTTP test:** Er wordt een testbericht gestuurd naar HiveMQ en actuele weerdata opgevraagd bij Open-Meteo.<br>• **Didactisch accent:** Eerst wordt de **volledige ruwe JSON** geprint met `json.dumps(indent=2)`, waarna studenten leren hoe ze specifieke sleutels selecteren (`gegevens['current']`). |
+| **10–25 min** | **Notebook 01: Stap 1 & 2** *(Webshop & Handleiding)* | • **Jij demonstreert op het scherm:** Antratek webshop ▸ product S31-LB ▸ artikelnummer EU868 ▸ Dragino wiki ▸ handleiding §2.2 (OTAA Join), §2.3 (Payload), §3.3 (AT-commando's).<br>• **Studentenopdracht 1.1 & 2.1:** Studenten vullen in hun notebook het gekozen sensortype in, beschrijven het LED-gedrag bij de Join (5s groen continu) en het AT-commando voor 10 min interval (`AT+TDC=600`). |
+| **25–50 min** | **Notebook 01: Stap 3** *(Payload decodering)* | • **Samen binaire bytes ontleden:** 11 bytes byte-voor-byte ontleden op het bord (Big-Endian, Two's complement voor negatieve temperaturen, bitmasking voor alarmvlaggen).<br>• **Opdracht 3.1:** Studenten schrijven hun eigen Python-code in de invulcel om 3 hex-payloads (A, B, C) automatisch te decoderen.<br>• **Stap 3g:** Je toont hoe de officiële JavaScript-decoder van Dragino via Node.js exact dezelfde waarden oplevert. |
+| **50–60 min** | **Pauze** | |
+| **60–70 min** | **Notebook 01: Stap 4** *(NB-IoT & MQTT)* | • S31-CB (NB-IoT/LTE-M variant) bespreken: AT-commando's (`AT+PRO`, `AT+SERVADDR`), JSON-dataformaat en netwerkvergelijking.<br>• **Opdracht 4.1 & 4.2:** AT-commando reeks samenstellen en netwerkbeperkingen (Duty cycle 868 MHz vs. NB-IoT gelicentieerd spectrum) toelichten. |
+| **70–95 min** | **Notebook 02: MQTT Live Meekijken** | • **Jij start de Simulatie:** Start Cel 5 (virtuele S31-CB) in een apart tabblad met `DUUR = 1500`. Drie stalafdelingen zenden nu live MQTT-berichten.<br>• **Studenten:** Abbonneren zich op live topics (`ugent/<klascode>/stal/#`), publiceren eigen statusberichten (`retain=True`), vangen een Pandas DataFrame op met alle klasberichten, en filteren alarmen (`interrupt == 1`). |
+| **95–110 min** | **Notebook 03 (of 04)** | • **Keuze Notebook 03:** Echte live data ophalen van 60+ burgerwetenschapsstations rond Gent via de HTTP REST API van Sensor.Community. Berekenen van de Temperature-Humidity Index (**THI hittestress**) en analyse van sensorverzadiging op 99.9% RV bij de DHT22.<br>• **Alternatief Notebook 04:** Wokwi ESP32 MicroPython simulatie. Zelf een virtuele DHT22 sensor programmeren en verbinden met MQTT. |
+| **110–120 min**| **Afronding** | • **Koppeling naar de theorie (slides 43–44):** Waar zat elk verbindingstype (LoRaWAN vs NB-IoT vs Wi-Fi) en elk protocol (MQTT vs HTTP vs Modbus) in wat we gedaan hebben? |
 
-**Korte variant (50 min):** 00 (5) → 01 stap 1–3 als demo met opdracht 3.1 (30) → 02 sectie 3 en 5 live (15).
+---
 
-## Oplossingen
+## Oplossingen & Referentiecode
 
-Dezelfde oplossingen staan ook in de notebooks zelf, in cellen met de tag `oplossing` (ingeklapt). Zie README voor het commando dat ze in één keer verwijdert.
+In de studentennotebooks (`notebooks/*.ipynb`) zijn alle code-oplossingscellen gestript. Hieronder vind je de directe referentiecode zoals deze aanwezig is in de docentenversie (`docent/notebooks/*.ipynb`).
 
-### Notebook 01, opdracht 3.1 (payloads)
+### Notebook 00 · Start hier
+**Opdracht (Open-Meteo API aanpassen):**
+```python
+import requests
+import json
 
-Opbouw: `[bat 2B][timestamp 4B][vlaggen 1B][temp 2B signed ×10][RV 2B ×10]`, alles big-endian.
+url = "https://api.open-meteo.com/v1/forecast"
+params = {
+    "latitude": 51.05,
+    "longitude": 3.72,
+    "current": "temperature_2m,relative_humidity_2m"
+}
 
-| | Payload | Batterij | Tijd (UTC) | Alarm | T (°C) | RV (%) |
-|---|---|---|---|---|---|---|
-| demo | `0B456AD703600001050197` | 2,885 V | 2026-10-20 06:00:00 | nee | 26,1 | 40,7 |
-| A | `0BC46AD703600000D60278` | 3,012 V | 2026-10-20 06:00:00 | nee | 21,4 | 63,2 |
-| B | `0AE6696486D800FFCE0393` | 2,790 V | 2026-01-12 05:30:00 | nee | **−5,0** (`FFCE` = 65486 → −50) | 91,5 |
-| C | `0B866A4671380101400320` | 2,950 V | 2026-07-02 14:10:00 | **ja** (byte 6 = `01`) | 32,0 | 80,0 |
+antwoord = requests.get(url, params=params, timeout=10)
+gegevens = antwoord.json()
 
-Bespreking: C is een alarm-uplink (temperatuur boven de ingestelde drempel, hittestress in juli); B heeft de laagste batterijspanning (koude verlaagt de spanning van een Li-SOCl₂-cel tijdelijk — leuk zijspoor). De voorbeeldpayload bevat exact de getallen uit de handleiding (`0B45`, `0105`, `0197`), zodat studenten hun werk daar kunnen aftoetsen.
+# 1. Eerst volledige JSON afdrukken
+print("=== VOLLEDIGE JSON-RESPONS ===")
+print(json.dumps(gegevens, indent=2))
 
-Veelgemaakte fouten: little-endian lezen (`450B`), het teken vergeten bij B, de vlaggenbyte als decimaal lezen, de temperatuur niet door 10 delen.
-
-### Notebook 01, opdracht 2.1
-Groene led brandt 5 s continu na een geslaagde join (§2.2 stap 3). Zendinterval: `AT+TDC=600` (seconden); via downlink `01 00 02 58` (0x258 = 600) — exacte syntaxis in §3.3.1.
-
-### Notebook 01, opdracht 4.1
+# 2. Daarna selectie afdrukken
+print("\n=== SELECTIE VAN GEGEVENS ===")
+huidig = gegevens["current"]
+eenheden = gegevens["current_units"]
+print(f"Gent: {huidig['temperature_2m']} {eenheden['temperature_2m']}, {huidig['relative_humidity_2m']} {eenheden['relative_humidity_2m']}")
 ```
+
+---
+
+### Notebook 01 · Sensor kiezen, verbinden en uitlezen
+
+#### Opdracht 2.1 (Handleiding §2.2 & §3.3.1)
+* **Groene LED bij Join:** Na het indrukken van de knop (5 s) knippert de groene LED 5× snel. Bij een geslaagde join brandt de groene LED **5 seconden continu**.
+* **AT-commando zendinterval:** `AT+TDC=600` (600 seconden = 10 minuten). Via TTN downlink: `01 00 02 58`.
+
+#### Opdracht 3.1 (Hex Payloads Decoderen)
+Opbouw: `[bat 2B][timestamp 4B][vlaggen 1B][temp 2B signed ×10][RV 2B ×10]`, alles Big-Endian.
+
+```python
+# Oplossing codecel in docent/notebooks/01_sensor_kiezen_en_verbinden.ipynb
+monster_data = {
+    "A": "0BC46AD703600000D60278",
+    "B": "0AE6696486D800FFCE0393",
+    "C": "0B866A4671380101400320"
+}
+
+for label, hex_code in monster_data.items():
+    resultaat = decodeer_s31lb(hex_code)
+    print(f"Sample {label}:", resultaat)
+```
+
+**Tabeloverzicht van de uitkomsten:**
+| Sample | Payload | Batterij | Tijd (UTC) | Alarm | T (°C) | RV (%) |
+|---|---|---|---|---|---|---|
+| **Demo** | `0B456AD703600001050197` | 2,885 V | 2026-10-20 06:00:00 | Nee | 26,1 | 40,7 |
+| **A** | `0BC46AD703600000D60278` | 3,012 V | 2026-10-20 06:00:00 | Nee | 21,4 | 63,2 |
+| **B** | `0AE6696486D800FFCE0393` | 2,790 V | 2026-01-12 05:30:00 | Nee | **−5,0** (`FFCE` = −50) | 91,5 |
+| **C** | `0B866A4671380101400320` | 2,950 V | 2026-07-02 14:10:00 | **Ja** (byte 6 = `01`) | 32,0 | 80,0 |
+
+#### Opdracht 4.1 (AT-commando's MQTT)
+```text
 AT+PRO=3,5
 AT+SERVADDR=broker.hivemq.com,1883
 AT+CLIENT=s31cb-afdeling3
 AT+PUBTOPIC=ugent/i700301/stal/afdeling3
 AT+MQOS=1
 AT+TDC=600
-AT+APN=<apn van de operator>
 ```
-(Zonder `AT+UNAME`/`AT+PWD`: de publieke broker vraagt geen aanmelding. Bij een eigen broker wel, plus `AT+TLSMOD` voor versleuteling.)
 
-### Notebook 01, opdracht 4.2
-LoRaWAN op 868 MHz: wettelijke *duty cycle* van 1 % (max. 36 s zendtijd per uur), lage bitsnelheid (0,3–50 kbit/s), en elke byte kost zendtijd dus batterij; het netwerk (TTN) hanteert bovendien een fair-use-beleid. NB-IoT: gelicentieerd spectrum, tientallen kbit/s, en je betaalt per sim/maand, niet per byte (binnen de bundel) — JSON van 300 bytes is dan geen probleem.
+#### Opdracht 4.2 (LoRaWAN vs NB-IoT)
+1. **LoRaWAN (868 MHz):** Ongelicentieerd spectrum met wettelijke *duty cycle* van 1% (max. 36 s zendtijd per uur) en TTN Fair-Use Policy (30 s uplink per dag). Elke byte kost zendtijd en batterij.
+2. **NB-IoT:** Gelicentieerd 4G/5G-spectrum zonder duty cycle. Je betaalt een vast maandabonnement per simkaart, waardoor JSON- payloads van 300 bytes geen netwerkbeperking vormen.
 
-### Notebook 02
-- 4.1: de statusberichten komen meteen binnen omdat ze *retained* zijn (derde element `True`).
-- Opdracht 1: afdeling 3 komt het vaakst in alarm (start op 27,8 °C, drempel 30 °C).
-- Opdracht 3: meting QoS 0 of 1 (een gemiste meting is niet erg, de volgende komt over 10 min); alarm QoS 1 of 2 (mag niet verloren gaan; bij 2 geen dubbele alarmen).
-- Opdracht 4: bv. `bedrijf/stal<1-2>/afdeling<1-4>/<grootheid>`; alle NH₃: `bedrijf/+/+/nh3`.
+---
 
-### Notebook 03
-- 2.1: DHT22 satureert op 99,9 % RV en is daar onnauwkeurig (±2–5 % RV, traag na condensatie); SHT31 ±2 % over het hele bereik, met anticondensbehuizing in de Dragino. In een stal met > 80 % RV is een DHT22 onbetrouwbaar.
-- 3: herbemonsteren naar 20 min vlakt pieken af; de maximale THI daalt licht. Voor THI-alarmen is een kort interval belangrijker dan voor dagelijkse gemiddelden.
-- 5: plausibiliteit (sprong > x °C per minuut), bevroren waarde (zelfde getal gedurende uren → sensor defect), tijdstempel te oud (verbinding weg), batterij < drempel, waarden buiten sensorspecificatie.
+### Notebook 02 · MQTT Live Meekijken
 
-### Notebook 04
-- 1: bij `INTERVAL = 600` wacht je 10 min; batterijduur schaalt ongeveer lineair met het interval (Dragino §4 geeft de tabel).
-- 2: na deep sleep moet de ESP32 opnieuw wifi associëren (1–4 s, tientallen mA) en de MQTT-verbinding opzetten; bij LoRaWAN blijft de sessie bewaard en kost een uplink enkele tientallen ms zendtijd.
-
-## Valkuilen
-
-- **Publieke broker:** iedereen kan meelezen en publiceren. Unieke klascode, geen persoonsgegevens, en reken erop dat er af en toe vreemde berichten verschijnen (goede aanleiding om over authenticatie en TLS te praten).
-- **Poort 1883 geblokkeerd** (campuswifi): vanuit een Codespace nooit een probleem; lokaal → websockets op 8884 (tip in notebook 00).
-- **Codespaces-uren:** 60 uur/maand gratis per account (2 cores). Studenten laten stoppen na de les.
-- **Sensor.Community:** de API is traag rond het hele uur en geeft soms 502/503; de notebooks vallen dan terug op de reservebestanden in `data/`. De archief-CSV van *gisteren* is pas 's ochtends volledig.
-- **Websites veranderen:** Antratek-URL's en Dragino-sectienummers zijn van oktober 2026. Controleer vóór de les. Maak tijdens je eigen voorbereiding screenshots van de drie sleutelpagina's (Antratek-product, Dragino §2.3.2, Dragino S31-CB §2.2) als reserve voor als een site offline is.
-- **Wokwi:** zonder account kun je simuleren maar niet bewaren; de publieke gateway is soms traag (wifi-verbinding tot 10 s). De `umqtt.simple`-bibliotheek zit in de MicroPython-firmware van Wokwi.
-- **Node.js** is nodig voor cel 3g (officiële decoder); zit in de devcontainer. Lokaal zonder Node: de cel slaat zichzelf over.
-
-## Codefragmenten voor slides 43–44
-
-Slide 44 (protocollen), MQTT — publiceren zoals de S31-CB:
+#### Opdracht 4.1 (Retained statusberichten)
 ```python
-client.publish("ugent/stal1/afdeling3", '{"temperature": 21.4, "humidity": 63.2}', qos=1)
-#               topic (adres bij de broker)   payload (JSON)                       QoS 1 = minstens één keer
+status_berichten = luister(f"{BASIS}/groepen/+/status", seconden=5)
+for topic, payload, is_retained in status_berichten:
+    print(f"Topic: {topic} | Inhoud: {payload} | Retained?: {is_retained}")
 ```
-LoRaWAN-payload decoderen (slide 43, LoRaWAN):
+* **Conclusie:** Berichten komen **onmiddellijk** binnen met `is_retained = True`. De broker bewaart de laatste status op het topic.
+
+#### Sectie 7 (Alarmen filteren & Last Will)
 ```python
-b = bytes.fromhex("0BC46AD703600000D60278")
-temperatuur = int.from_bytes(b[7:9], "big", signed=True) / 10    # 21.4 °C
+alarm_berichten = [
+    (topic.split("/")[-1], json.loads(payload)["temperature"], json.loads(payload)["humidity"])
+    for topic, payload, retain in ruwe_berichten
+    if json.loads(payload).get("interrupt") == 1
+]
+print("Aantal alarmen:", len(alarm_berichten))
 ```
-Modbus (slide 44), lezen van een klimaatcomputer of RS485-LB:
+* **Last Will & Testament (LWT):** `client.will_set(topic, payload="offline", qos=1, retain=True)`. Als een stalsensor wegvalt door kabelbreuk of lege batterij, publiceert de broker automatisch het offline-bericht naar de klimaatcomputer.
+
+---
+
+### Notebook 03 · Echte sensoren via HTTP REST API
+
+#### Opdracht 2.1 (Sensorverzadiging op 99.9% RV)
 ```python
-client.read_holding_registers(address=0, count=2, slave=1)       # register 0 = T×10, register 1 = RV×10
+print("Sensortypes op 99.9% RV:")
+print(df[df["humidity"] >= 99.9]["type"].value_counts())
 ```
-HTTP (slide 44):
+* **Conclusie:** Vrijwel alle sensoren die op 99.9% RV staan zijn van het goedkope type **DHT22**. Bij hoge luchtvochtigheid (zoals in veestallen) raakt het capacitieve polymeer verzadigd met condens water, waardoor de sensor urenlang op 99.9% blijft steken. Geleidelijke gekalibreerde sensoren (SHT31, BME280) zijn vereist.
+
+#### Sectie 7 (Resampling & THI)
 ```python
-requests.get("https://data.sensor.community/airrohr/v1/sensor/82001/").json()
+# Binnensensoren vs Buitensensoren
+print(df.groupby("binnen")["THI"].describe().round(1))
+
+# Resampling naar 20 min intervallen
+df_dag_20min = df_dag.resample("20min", on="timestamp").mean(numeric_only=True)
+print(f"Piek THI (2.5 min): {df_dag['THI'].max():.2f} vs (20 min): {df_dag_20min['THI'].max():.2f}")
 ```
+* **Conclusie:** Herbemonsteren naar 20-minuten intervallen vlakt korte extremen en pieken af, waardoor de maximale THI-score licht afneemt.
+
+---
+
+### Notebook 04 · Wokwi Virtuele Sensor (ESP32 MicroPython)
+1. **Zendinterval = 600 s:** Batterijduur stijgt drastisch doordat de ESP32 99% van de tijd in `machine.deepsleep()` staat.
+2. **Wi-Fi vs LoRaWAN:** Wi-Fi associatie kost 100–200 mA gedurende enkele seconden. LoRaWAN activeert de radio voor slechts enkele milliseconden, wat jaren batterijduur op een knoopcel oplevert.
+3. **JSON Flexibiliteit:** Extra velden toevoegen (bijv. `"lichtsterkte": 450`) verstoort bestaande ontvangers niet, mits het afgesproken schema gerespecteerd blijft.
+
+---
+
+## Valkuilen & Practical Tips
+
+* **Publieke HiveMQ Broker:** Iedereen kan meelezen op `broker.hivemq.com`. Gebruik de unieke klascode en herinner studenten eraan dat er geen gevoelige persoonsgegevens verzonden mogen worden.
+* **Firewalls & Poort 1883:** In Codespaces werkt poort `1883` altijd direct. Mocht een student lokaal op campus-Wi-Fi werken waar 1883 geblokkeerd is, schakel dan over op WebSockets via poort `8884` (zie tip in Notebook 00).
+* **Sensor.Community API:** Bij hevig netwerkverkeer kan de live API van Sensor.Community vertragen. Het notebook beschikt over automatische fallback-mechanismen naar lokale reserve-bestanden in `data/`.
+* **Codespaces Beheer:** Herinner studenten eraan om na afloop hun Codespace af te sluiten (*Codespaces ▸ Stop current codespace*) om gratis uren te besparen.
