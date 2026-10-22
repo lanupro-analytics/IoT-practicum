@@ -4,7 +4,7 @@
 
 ## Structurele Opzet & Bestandsbeheer
 
-Het practicum kent twee versies die in de repository beheerd worden:
+De lesomgeving kent twee versies die in de repository beheerd worden:
 
 1. **`docent/notebooks/` (Docentenversie):**
    * **Doel:** Volledige referentie, uitgewerkte code-oplossingen, ingevulde tabellen en **100% voorgevoerde uitvoerblokken** (plots, tabellen, console-logs).

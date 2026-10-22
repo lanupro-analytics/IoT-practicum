@@ -1,12 +1,12 @@
 # 🌐 Starten met IoT: van webshop tot datastroom
 
-Welkom bij het practicum **Starten met IoT (Internet of Things)** van de opleiding **Precisielandbouw – toepassingen voor plant en dier** (UGent, les *Klimaatbeheersing in de veehouderij*, onderdeel 2.3).
+Welkom bij de introductieles **Starten met IoT (Internet of Things)** van de opleiding **Precisielandbouw – toepassingen voor plant en dier** (UGent, les *Klimaatbeheersing in de veehouderij*, onderdeel 2.3).
 
-In dit practicum ga je stapsgewijs aan de slag met echte draadloze klimaatsensoren, datadecoderingsketens, MQTT-netwerken en HTTP REST API's — **volledig in je browser, zonder dat je fysieke apparaten hoeft aan te kopen of op je eigen PC hoeft te installeren!**
+In deze introductieles ga je stapsgewijs aan de slag met echte draadloze klimaatsensoren, datadecoderingsketens, MQTT-netwerken en HTTP REST API's — **volledig in je browser, zonder dat je fysieke apparaten hoeft aan te kopen of op je eigen PC hoeft te installeren!**
 
 ---
 
-## 🚀 Snelstartgids voor Studenten (In 4 eenvoudige stappen)
+## 🚀 Snelstartgids (In 4 eenvoudige stappen)
 
 Heb je nog nooit met GitHub of Python gewerkt? Geen zorgen! Volg de 4 stappen hieronder om in enkele minuten aan de slag te gaan.
 
@@ -77,7 +77,7 @@ Zodra je Codespace geopend is:
 ---
 
 ### Stap 4: Na afloop van de les (Codespace stoppen)
-GitHub geeft elke student elke maand gratis uren om Codespaces te gebruiken. Sluit na de les je virtuele computer netjes af zodat er geen uren onnodig verloren gaan:
+GitHub geeft elk account elke maand gratis uren om Codespaces te gebruiken. Sluit na de les je virtuele computer netjes af zodat er geen uren onnodig verloren gaan:
 
 1. Klik linksonder in VS Code op de blauwe of groene balk waarop **`Codespaces: ...`** staat.
 2. Kies in het menu bovenaan **`Stop Current Codespace`**.
@@ -85,9 +85,9 @@ GitHub geeft elke student elke maand gratis uren om Codespaces te gebruiken. Slu
 
 ---
 
-## 📚 Inhoud van het Practicum
+## 📚 Inhoud van de Introductieles
 
-Het practicum bestaat uit 5 interactieve Jupyter Notebooks. Voer de notebooks in onderstaande volgorde uit:
+Deze introductieles bestaat uit 5 interactieve Jupyter Notebooks. Voer de notebooks in onderstaande volgorde uit:
 
 | Notebook | Onderwerp & Wat je leert | Verwachte Duur |
 |---|---|---|
