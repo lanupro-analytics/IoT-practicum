@@ -94,7 +94,7 @@ Deze introductieles bestaat uit 5 interactieve Jupyter Notebooks. Voer de notebo
 | **`00_start_hier.ipynb`** | **Start & Verbindingstest:** Controle van de Python-omgeving, eerste MQTT-testbericht versturen naar HiveMQ en een eerste HTTP REST API-vraag stellen aan Open-Meteo. | ± 10 min |
 | **`01_sensor_kiezen_en_verbinden.ipynb`** | **Hardware & Binaire Payloads:** Keuze van een klimaatsensor in een webshop (Antratek), handleiding raadplegen (Dragino S31-LB), en het **byte-voor-byte handmatig decoderen** van 11-byte LoRaWAN hex-payloads. | ± 45 min |
 | **`02_mqtt_live_meekijken.ipynb`** | **MQTT Protocollen & Simulatie:** Zelf een virtuele klimaatsensor in Python starten die live datastromen naar de HiveMQ-broker stuurt. Leren werken met topics, wildcards (`+`/`#`), retained berichten, LWT en Pandas gegevensanalyse. | ± 30 min |
-| **`03_echte_sensoren_via_http.ipynb`** | **Echte Sensoren & Hittestress (THI):** Live data ophalen van 60+ burgerwetenschapsstations rond Gent via de REST API van Sensor.Community. Berekenen van de Temperature-Humidity Index (THI) voor melkvee en analyse van sensorverzadiging (DHT22 op 99.9% RV). | ± 30 min |
+| **`03_echte_sensoren_via_http.ipynb`** | **Echte Sensoren & Hittestress (THI):** Live data ophalen van 60+ publieke meetstations rond Gent via de REST API van Sensor.Community (*een publiek sensornetwerk van burgers en vrijwilligers*). Berekenen van de Temperature-Humidity Index (THI) voor melkvee en analyse van sensorverzadiging (DHT22 op 99.9% RV). | ± 30 min |
 | **`04_wokwi_virtuele_sensor.ipynb`** | **MicroPython Hardware-simulatie:** Zelf een virtuele ESP32 met DHT22-sensor programmeren in de Wokwi browser-simulator en draadloos via Wi-Fi laten communiceren met MQTT. | ± 30 min |
 
 ---
