@@ -122,14 +122,6 @@ jupyter lab
 
 ---
 
-## 👩‍🏫 Informatie voor Docenten
-
-* De uitgewerkte docentenversies van alle notebooks (inclusief alle voorgevoerde uitvoerblokken, uitgewerkte code-oplossingen en achtergrondinformatie) zijn te vinden in de map **`docent/notebooks/`**.
-* Het didactisch lesverloop, de tijdsplanning per onderdeel en de antwoorden op de vragen staan beschreven in **`docent/draaiboek.md`**.
-* Achtergrondinformatie over netwerkbeveiliging, eigen API's bouwen met FastAPI en geavanceerde hardwareopstellingen vind je in **`docent/verdieping_beveiliging_en_apis.md`**.
-
----
-
 ## 📖 Bronnen & Referenties
 
 * **Antratek Electronics (België/Nederland):** <https://www.antratek.be/lora/sensor-nodes/temperature-humidity>
