@@ -1,12 +1,10 @@
 {
   "name": "Starten met IoT precisielandbouw",
-  "image": "mcr.microsoft.com/devcontainers/python:3.12",
-  "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "lts"
-    }
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
   },
-  "postCreateCommand": "python -m pip install --upgrade pip && pip install -r requirements.txt && python -m ipykernel install --user --name python3 --display-name 'Python 3 (ipykernel)'",
+  "postCreateCommand": "python -m ipykernel install --user --name python3 --display-name 'Python 3 (ipykernel)'",
   "customizations": {
     "vscode": {
       "extensions": [

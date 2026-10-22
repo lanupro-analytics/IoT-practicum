@@ -1,9 +1,11 @@
-FROM mcr.microsoft.com/devcontainers/python:3.12
+FROM python:3.12-slim
 
-# Install Node.js LTS for Dragino JS payload decoder testing (Notebook 01)
-RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
-    apt-get update && \
-    apt-get install -y nodejs && \
+# Install git, curl, and Node.js LTS for Dragino JS payload decoder testing (Notebook 01)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git curl build-essential && \
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
+    apt-get install -y --no-install-recommends nodejs && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workspace
