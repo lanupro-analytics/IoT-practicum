@@ -1,4 +1,4 @@
-# Docentendraaiboek · IoT-practicum "van webshop tot datastroom"
+# Docentendraaiboek · Starten met IoT "van webshop tot datastroom"
 
 *Bij les 2 Klimaatbeheersing, onderdeel 2.3 (slides 43–44). Versie 19 oktober 2026.*
 

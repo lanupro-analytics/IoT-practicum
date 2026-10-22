@@ -1,4 +1,4 @@
-# IoT-practicum: van webshop tot datastroom
+# Starten met IoT: van webshop tot datastroom
 
 Practicum bij **I700301 Precisielandbouw – toepassingen voor plant en dier** (UGent), les *Klimaatbeheersing in de veehouderij*, onderdeel 2.3 *IoT: verbindingstypes en gegevensuitwisseling*.
 
@@ -44,7 +44,7 @@ Open vervolgens `http://localhost:8888` in je browser om JupyterLab te openen.
 
 ```bash
 git clone <deze-repo>
-cd iot_practicum
+cd starten-met-iot
 pip install -r requirements.txt
 jupyter lab
 ```

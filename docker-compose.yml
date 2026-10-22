@@ -1,7 +1,7 @@
-name: iot-practicum
+name: starten-met-iot
 
 services:
-  iot-practicum:
+  starten-met-iot:
     build:
       context: .
       dockerfile: Dockerfile
