@@ -106,3 +106,8 @@ Hieronder staan drie concrete ideeën die als vervolgmodule of verdiepingsopdrac
   3. **TTN Network Server** voert de JavaScript payload-decoder uit.
   4. De gedecodeerde JSON-data wordt via een **MQTT Integratie** of **Webhook** doorgestuurd naar een Python dashboard of platform zoals **Datacake** of **ThingsBoard**.
 * **Leerdoel:** Het demonstreren van een volledig autonoom, netonafhankelijk IoT-systeem in de landbouw zonder afhankelijkheid van lokale Wi-Fi.
+
+---
+
+> 💡 **Meer ideeën & lesmodules:** Raadpleeg ook het bestand **`docent/ideeen.md`** voor een uitgebreide lijst met uitgewerkte didactische concepten (API-documentatie opdrachten, LoRaWAN vs. NB-IoT SIM-kostenvergelijking, cross-over data-sharing tussen medestudenten, live hardware-demos en IP-camera video streaming met Neurale Netwerken).
+

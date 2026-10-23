@@ -181,3 +181,5 @@ print(f"Piek THI (2.5 min): {df_dag['THI'].max():.2f} vs (20 min): {df_dag_20min
 * **Firewalls & Poort 1883:** In Codespaces werkt poort `1883` altijd direct. Mocht een student lokaal op campus-Wi-Fi werken waar 1883 geblokkeerd is, schakel dan over op WebSockets via poort `8884` (zie tip in Notebook 00).
 * **Sensor.Community API:** Bij hevig netwerkverkeer kan de live API van Sensor.Community vertragen. Het notebook beschikt over automatische fallback-mechanismen naar lokale reserve-bestanden in `data/`.
 * **Codespaces Beheer:** Herinner studenten eraan om na afloop hun Codespace af te sluiten (*Codespaces ▸ Stop current codespace*) om gratis uren te besparen.
+* **Aanvullende Ideeën & Uitbreidingsmodules:** Zie **`docent/ideeen.md`** voor ideeën over API-documentatie-opdrachten, vergelijkende studies (LoRaWAN vs. NB-IoT SIM-kosten), data-sharing tussen medestudenten (THI/voederbehoefte), live hardware-demos (4G gateway) en beeldverwerking/AI (IP-camera's & Neurale Netwerken).
+
